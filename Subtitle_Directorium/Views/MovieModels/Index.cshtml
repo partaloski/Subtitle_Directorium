@@ -1,0 +1,128 @@
+﻿@model IEnumerable<Subtitle_Directorium.Models.MovieModel>
+<head>
+    <link href="@Url.Content("~/Styles/styleIndex.css")" rel="stylesheet" type="text/css" />
+</head>
+@{
+    ViewBag.Title = "Movies List";
+}
+
+<h2 class="titlesh2">List of Movies</h2>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#listButton").click(function () {
+            $("#list").fadeToggle();
+            $("#sl").toggleClass("sortList");
+            $("#sl").toggleClass("sortListExpanded");
+        });
+        $("#list").hide();
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            var value2 = $("#myInputGenre").val().toLowerCase();
+            $("#myList li").filter(function () {
+                $(this).toggle($(this).children(":first").text().toLowerCase().indexOf(value) > -1 && $(this).children(":last").text().toLowerCase().indexOf(value2)  > -1)
+            });
+        });
+
+        $("#myInputGenre").on("keyup", function () {
+            var value2 = $(this).val().toLowerCase();
+            var value = $("#myInput").val().toLowerCase();
+            $("#myList li").filter(function () {
+                $(this).toggle($(this).children(":first").text().toLowerCase().indexOf(value) > -1 && $(this).children(":last").text().toLowerCase().indexOf(value2) > -1)
+            });
+        });
+        $("#searchImage").click(function () {
+            $(this).animate({ left: '-10%', opacity: '0' });
+            $("#myInput").show();
+            $("#myInputGenre").show();
+            $("#searchImageDone").animate({ left: '0%', opacity: '1' })
+            $(".topItem").animate({ height: '350px'})
+        })
+        $("#searchImageDone").click(function () {
+            $(this).animate({ left: '40%', opacity: '0' });
+            $("#searchImage").animate({ left: '25%', opacity: '1' })
+            $(".topItem").animate({ height: '150px' })
+            $("#myInput").fadeOut();
+            $("#myInputGenre").fadeOut();
+        })
+    });
+</script>
+<div style="float: left;" class="sortList" id="sl">
+    <input type="button" id="listButton" value="Order Movies" />
+    <ul id="list">
+        <li class="liTem">@Html.ActionLink("Name", "ChangeSort", new { id = 0 })</li>
+        <li class="liTem">@Html.ActionLink("Name Desc", "ChangeSort", new { id = 1 })</li>
+        <li class="liTem">@Html.ActionLink("Rating", "ChangeSort", new { id = 2 })</li>
+        <li class="liTem">@Html.ActionLink("Rating Desc", "ChangeSort", new { id = 3 })</li>
+        <li class="liTem">@Html.ActionLink("Genre", "ChangeSort", new { id = 4 })</li>
+        <li id="lastlist">@Html.ActionLink("Genre Desc", "ChangeSort", new { id = 5 })</li>
+    </ul>
+</div>
+
+@if (User.IsInRole("Admin") || User.IsInRole("Editor") || User.IsInRole("Submittor"))
+{
+    <span class="titlesp">
+        @Html.ActionLink("Create New", "Create")
+    </span>
+}
+
+<div class="topItem">
+    <img src="~/Styles/advanced-search.png" id="searchImage" />
+    <img src="~/Styles/advanced-search-finished.png" id="searchImageDone" />
+    <input type="text" id="myInput" placeholder="Type to search for movies by name" />
+    <input type="text" id="myInputGenre" placeholder="Type to search for movies by genre" />
+</div>
+
+
+@{
+    IEnumerable<Subtitle_Directorium.Models.MovieModel> movix;
+    if (Session["sortFilter"] == null)
+    {
+        movix = Model.OrderBy(movie => movie.Name);
+    }
+    else if ((int)Session["sortFilter"] == 1)
+    {
+        movix = Model.OrderByDescending(movie => movie.Name);
+    }
+    else if ((int)Session["sortFilter"] == 2)
+    {
+        movix = Model.OrderBy(movie => movie.Rating);
+    }
+
+    else if ((int)Session["sortFilter"] == 3)
+    {
+        movix = Model.OrderByDescending(movie => movie.Rating);
+    }
+    else if ((int)Session["sortFilter"] == 4)
+    {
+        movix = Model.OrderBy(movie => movie.Genre);
+    }
+
+    else if ((int)Session["sortFilter"] == 5)
+    {
+        movix = Model.OrderByDescending(movie => movie.Genre);
+    }
+
+    else
+    {
+        movix = Model.OrderBy(movie => movie.Name);
+    }
+
+
+    <ul id="myList">
+        @foreach (var item in movix)
+        {
+        <li class="mylistLI">
+            <span class="liSpan">@item.Name</span>
+            <div class="movie-box" style="background-image: url(@item.URL);">
+                <h2 style="text-align: center; margin-top: 20%; z-index: 1; position:relative">@item.Name</h2>
+                <h4 style="text-align: center; ">Genre: @item.Genre</h4>
+                <h4 style="text-align: center; ">Rating: @((item.Rating).ToString(".0"))</h4>
+                <h4 style="text-align: center;" class="details-a">@Html.ActionLink("Movie Details", "Details", new { id = item.ID })</h4>
+            </div>
+            <span class="liSpan2">@item.Genre</span>
+        </li>
+        }
+    </ul>
+
+}

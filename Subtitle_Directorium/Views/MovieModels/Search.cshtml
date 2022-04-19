@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Subtitle_Directorium.Models.MovieModel>
+<head>
+    <link href="@Url.Content("~/Styles/styleIndex.css")" rel="stylesheet" type="text/css" />
+</head>
+@{
+    ViewBag.Title = "Movies List";
+}
+
+<h2 class="titlesh2">List of Movies</h2>
+
+
+
+<p class="titlesp">
+    @Html.ActionLink("Create New", "Create")
+</p>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myList li").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+</script>
+<div style="float: left;" class="sortList" id="sl">
+    <input type="button" id="listButton" value="Order Movies" />
+    <input type="text" id="myInput" placeholder="Search..." />
+    
+</div>
+
+@{
+    IEnumerable<Subtitle_Directorium.Models.MovieModel> movix;
+    if(Session["sortFilter"] == null)
+    {
+        movix = Model.OrderBy(movie => movie.Name);
+    }
+    else if((int)Session["sortFilter"] == 1)
+    {
+        movix = Model.OrderByDescending(movie => movie.Name);
+    }
+    else if ((int)Session["sortFilter"] == 2)
+    {
+        movix = Model.OrderBy(movie => movie.Rating);
+    }
+
+    else if((int)Session["sortFilter"] == 3)
+    {
+        movix = Model.OrderByDescending(movie => movie.Rating);
+    }
+    else if ((int)Session["sortFilter"] == 4)
+    {
+        movix = Model.OrderBy(movie => movie.Genre);
+    }
+
+    else if ((int)Session["sortFilter"] == 5)
+    {
+        movix = Model.OrderByDescending(movie => movie.Genre);
+    }
+
+    else
+    {
+        movix = Model.OrderBy(movie => movie.Name);
+    }
+    <ul id="myList">
+        @foreach (var item in movix)
+        {
+        <li class="mylistLI">
+            <span class="liSpan">@item.Name</span>
+            
+            <div class="movie-box" style="background-image: url(@item.URL);">
+                <h2 style="text-align: center; margin-top: 20%; z-index: 1; position:relative">@item.Name</h2>
+                <h4 style="text-align: center; ">Genre: @item.Genre</h4>
+                <h4 style="text-align: center; ">Rating: @((item.Rating).ToString(".0"))</h4>
+                <h4 style="text-align: center;" class="details-a">@Html.ActionLink("Details", "Details", new { id = item.ID })</h4>
+            </div>
+        </li>
+        }
+    </ul>
+}

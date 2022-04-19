@@ -1,0 +1,103 @@
+﻿@model Subtitle_Directorium.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<head>
+    <link href="@Url.Content("~/Styles/styleIndex.css")" rel="stylesheet" type="text/css" />
+</head>
+<h2 class="titlesh2">@ViewBag.Title</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div id="createDiv">
+    <h4 class="titlesother">Change your account settings</h4>
+    <dl class="dl-horizontal" >
+        <dt class="c-label">Role:</dt>
+        <dd>
+            @{
+
+                if (User.IsInRole("Admin"))
+                {
+                    <span>Admin</span>
+                }
+                else if (User.IsInRole("User"))
+                {
+                    <span>User</span>
+                }
+                else if (User.IsInRole("Editor"))
+                {
+                    <span>Editor</span>
+                }
+                else if (User.IsInRole("Submittor"))
+                {
+                    <span>Submittor</span>
+                }
+                else
+                {
+                    <span>No role selected.</span>
+                }
+            }
+        </dd>
+        <dt class="c-label">Password:</dt>
+        <dd>
+            
+            @if (Model.HasPassword)
+            {
+                @Html.ActionLink("Change your password", "ChangePassword")
+            }
+            else
+            {
+                @Html.ActionLink("Create", "SetPassword")
+            }
+            
+        </dd>
+        @*
+            Phone Numbers can used as a second factor of verification in a two-factor authentication system.
+
+             See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                for details on setting up this ASP.NET application to support two-factor authentication using SMS.
+
+             Uncomment the following block after you have set up two-factor authentication
+        *@
+        @*
+            <dt>Phone Number:</dt>
+            <dd>
+                @(Model.PhoneNumber ?? "None")
+                @if (Model.PhoneNumber != null)
+                {
+                    <br />
+                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
+                    }
+                }
+                else
+                {
+                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
+                }
+            </dd>
+        *@
+            @*@if (Model.TwoFactor)
+                {
+                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <text>Enabled
+                        <input type="submit" value="Disable" class="btn btn-link" />
+                        </text>
+                    }
+                }
+                else
+                {
+                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <text>Disabled
+                        <input type="submit" value="Enable" class="btn btn-link" />
+                        </text>
+                    }
+                }*@
+    </dl>
+</div>

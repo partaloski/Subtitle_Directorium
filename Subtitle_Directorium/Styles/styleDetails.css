@@ -1,0 +1,326 @@
+﻿
+@font-face {
+    font-family: Adventure;
+    src: url('/fonts/Adventure/Adventure.eot'); /* IE9 Compat Modes */
+    src: url('/fonts/Adventure/Adventure.eot') format('embedded-opentype'), /* IE6-IE8 */
+    url('/fonts/Adventure/Adventure.woff') format('woff'), /* Modern Browsers */
+    url('/fonts/Adventure/Adventure.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('/fonts/Adventure/Adventure.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+    font-family: Dimbo;
+    src: url('/fonts/Dimbo/Dimbo.eot'); /* IE9 Compat Modes */
+    src: url('/fonts/Dimbo/Dimbo.eot') format('embedded-opentype'), /* IE6-IE8 */
+    url('/fonts/Dimbo/Dimbo.woff') format('woff'), /* Modern Browsers */
+    url('/fonts/Dimbo/Dimbo.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('/fonts/Dimbo/Dimbo.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+body{
+    background-color: rgb(0,0,0, 0.9);
+    background-image: url("background.png");
+}
+
+.body-content {
+    transition: 350ms;
+    background-color: rgba(255,255,255,0.75);
+    width: 82%;
+    min-height: 1320px;
+    margin-top: 20px;
+    border-radius: 35px;
+    padding: 20px;
+}
+
+.body-content:hover {
+    background-color: rgba(255,255,255,0.9);
+}
+
+.titlesh2 {
+    background: linear-gradient(rgb(0,0,0,0.6) 65%, rgb(255, 255, 255, 0.6));
+    transition: 350ms;
+    text-align: center;
+    padding: 12px;
+    border-radius: 12px;
+    color: white;
+    font-size: 450%;
+    font-family: Adventure;
+    z-index: 2;
+}
+
+.titlesh2:hover{
+    opacity: 0.85;
+}
+.titlesp a {
+    background-color: rgba(0,0,0,0.5);
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    color: goldenrod;
+    font-family: Adventure;
+    font-size: 190%;
+    width: 40%;
+    margin-left: 29%;
+    display: block;
+}
+
+.rightDiv {
+    margin-top: 10px;
+    padding: 20px;
+    display: inline-block;
+    float: left;
+    width: 60%;
+    height: 950px;
+    border-left: 7px dashed rgb(255,180,0, 0.9);
+    border-radius: 10px 10px 10px 40px;
+}
+.leftDiv {
+    margin-top: -90px;
+    z-index: 0;
+    float: left;
+    width: 450px;
+    height: 80%;
+    display: block;
+}
+.leftDiv p{
+    margin-left: -4%;
+    color: darkblue;
+}
+
+.leftDiv img {
+    transition: 250ms;
+    opacity: 0.8;
+    border-radius: 25px 20px;
+    position:relative;
+}
+
+.leftDiv img:hover {
+    opacity: 0.95;
+}
+
+.movie-stats {
+    list-style-type: none;
+    margin-left: -50px;
+}
+
+.movie-stats li {
+    transition: 400ms;
+    font-family: Dimbo;
+    display: block;
+    border-radius: 10px 5px;
+    background-color: rgba(0,0,0,0.3);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    margin-top: 7px;
+    padding: 5px 5px 5px 10px;
+    font-size: 240%;
+    font-weight: bold;
+    min-height: 65px;
+    padding: 20px;
+}
+
+
+.movie-stats li:hover{
+    background-color: rgba(0,0,0,0.8);
+    color: rgb(255, 140, 0,1);
+}
+
+.movie-stats a{
+    transition: 300ms;
+    color: white;
+    display:inline;
+    text-align: center;
+    font-size: 180%;
+}
+
+.movie-stats a:hover{
+    color: rgb(0,0,0, 0.45);
+}
+.available-subs{
+    list-style-type: none;
+}
+
+.subtitle-add-button {
+    width: 48%;
+    transition: 400ms;
+    font-family: Adventure !important;
+    display: inline-block;
+    text-align: center;
+    list-style-type: none;
+    border-radius: 10px 10px !important;
+    background-color: rgba(0,0,0,0.6) !important;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    margin-top: 7px;
+    padding-left: -20px !important;
+    font-size: 90% !important;
+    font-weight: bold;
+    min-height: 65px;
+    float: left;
+    margin: 6px;
+}
+
+.subtitle-add-button a:hover{
+    color: white;
+}
+
+.available-subs li {
+    padding: 7px;
+    font-size: 110%;
+    font-family: Adventure;
+    background-color: lightgray;
+    border-radius: 5px;
+    margin-top: 6px;
+    font-style: italic;
+}
+.available-subs strong{
+    font-size: 150%;
+    font-style: normal;
+    color:darkgreen;
+}
+.navbar {
+    border-radius: 0px 0px 80px 80px;
+    background-color: rgb(100,100,100,0.95);
+    border: 0px;
+}
+
+.navbar a{
+    color:white !important;
+    transition: 150ms;
+    font-size: 125%;
+    font-family: 'Adventure'
+}
+
+#specialNav {
+    font-size: 65% !important;
+}
+
+.navbar a:hover{
+    color:gold !important;
+}
+.available-subs li {
+    display: inline-block;
+    padding: 7px 5px 7px 35px;
+    min-width: 90%;
+    margin-left: 20px;
+    background-color: rgb(255,255,255, 0.65);
+    font-size: 140%;
+    transition: 350ms;
+    color: darkgoldenrod;
+    border: 1px solid rgb(0,0,0,0.2);
+}
+
+.available-subs li:hover {
+    background-color: rgb(0,0,0, 0.1);
+    border-color: rgb(0,0,0,0.5)
+}
+
+.available-subs li a {
+    text-align: center;
+    position: relative;
+    float:right;
+    margin-right: 20px;
+    color: darkblue !important;
+}
+.available-subs li .lang {
+    font-size: 140%;
+    color: black;
+}
+
+.movie-desc p {
+    font-size: 80%;
+    display: block;
+    width: 85%;
+    text-align: justify;
+    margin-left: 7%;
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 4px;
+    background-color: rgb(255,180,0, 0.65);
+    color:white;
+    transition: 300ms;
+}
+.movie desc:hover {
+    background-color: rgb(255,180,0, 0.85);
+}
+#createDiv{
+    margin-left: 27%;
+}
+
+.button-movie {
+    transition: 350ms;
+    font-size: 280%;
+    color: goldenrod;
+    text-align: center;
+    margin-left: 0%;
+}
+.button-movie a{
+    transition: 350ms;
+    display: block;
+    color: goldenrod;
+    margin: 10px;
+    margin-left: 10%;
+    width: 375px;
+    padding: 14px;
+    border-radius: 10px;
+    font-family: Adventure;
+    background-color: rgb(0,0,0,0.65);
+}
+
+
+.button-movie a:hover {
+    background-color: rgb(0,0,0,0.9);
+}
+
+.value-box {
+    transition: 300ms;
+    color: White;
+    padding: 12px;
+    border-radius: 5px;
+    background-color: rgb(255,100,0, 0.45);
+}
+
+.value-box:hover {
+    color:black;
+    background-color: rgb(255,200,0, 0.85);
+}
+
+.control-label {
+    transition: 350ms;
+    padding: 10px !important;
+    font-size: 135%;
+    color: white;
+    border-radius: 12px;
+    background-color: rgb(255,180,0, 0.55);
+    text-align:center !important;
+}
+
+#last{
+    margin-top: 70px;
+}
+
+.control-label:hover{
+    background-color: rgb(255,120,0, 0.85);
+
+}
+
+.dd-class {
+    display:block;
+    transition: 350ms;
+    padding: 10px !important;
+    font-size: 135%;
+    color: rgb(255,180,0, 1);
+    border-radius: 12px;
+    background-color: rgb(100,100,100, 0.6);
+    text-align: center !important;
+}
+
+.group-delete {
+    display: block;
+    width: 250px;
+    height: 120px;
+}
+
+
+select, #Genre, option {
+    font-size: 190%;
+    font-family: Dimbo;
+}

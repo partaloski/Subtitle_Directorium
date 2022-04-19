@@ -1,0 +1,32 @@
+﻿@model Subtitle_Directorium.Models.Line
+
+<head>
+    <link href="@Url.Content("~/Styles/styleEdit.css")" rel="stylesheet" type="text/css" />
+</head>
+@{
+    ViewBag.Title = "Editing line for the subtitle";
+}
+
+<h2 class="titlesh2">Editing line number (@Session["lineNum"]+1)</h2>
+
+<ul class="top">
+    <li>
+        @Html.ActionLink("Previous", "SubPrevLine", new { id = Session["id"]})
+    </li>
+    <li>
+        @Html.ActionLink("Save", "SubSaveLine", new { id = Session["id"] })
+    </li>
+    <li>
+        @Html.ActionLink("Next", "SubNextLine", new { id = Session["id"]})
+    </li>
+</ul>
+<div>
+    <div class="single-edit-field">
+        @Html.DisplayNameFor(m => m.timestamp)
+        @Html.EditorFor(m => m.timestamp)
+    </div>
+    <div class="single-edit-field">
+        @Html.DisplayNameFor(m => m.text)
+        @Html.TextAreaFor(m => m.text , new { cols = "80", rows = "80" })
+    </div>
+</div>

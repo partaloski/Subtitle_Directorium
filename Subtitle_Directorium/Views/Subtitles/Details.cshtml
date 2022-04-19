@@ -1,0 +1,44 @@
+﻿@model Subtitle_Directorium.Models.Subtitle
+
+@{
+    ViewBag.Title = "Details";
+}
+<head>
+    <link href="@Url.Content("~/Styles/styleCreate.css")" rel="stylesheet" type="text/css" />
+</head>
+
+<h2 class="titlesh2">Details</h2>
+
+<div id="createDiv2">
+    <dl class="dl-horizontal">
+        <dt class="control-label">
+            @Html.DisplayNameFor(model => model.language)
+        </dt>
+
+        <dd style="font-family: Adventure; font-size: 200%;">
+            <br />
+            @Html.DisplayFor(model => model.language)
+        </dd>
+        <br />
+        <br />
+        <dt class="control-label">
+            Number of letters in .raw
+        </dt>
+
+        <dd style="font-family: Adventure; font-size: 200%;">
+            <br />
+            @Html.DisplayFor(model => model.raw.Length)
+        </dd>
+
+        <br />
+        <br />
+        <dt class="control-label">
+            @Html.DisplayNameFor(model => model.movieName)
+        </dt>
+
+        <dd style="font-family: Adventure; font-size: 300%;">
+            @Html.DisplayFor(model => model.movieName)
+        </dd>
+
+    </dl>
+</div>

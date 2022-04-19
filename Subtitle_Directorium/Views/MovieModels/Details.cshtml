@@ -1,0 +1,105 @@
+﻿@model Subtitle_Directorium.Models.MovieModel
+<head>
+    <link href="@Url.Content("~/Styles/styleDetails.css")" rel="stylesheet" type="text/css" />
+</head>
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 class="titlesh2">Details</h2>
+
+<div class="leftDiv">
+    <img style="height: auto; width: 400px; margin: 15px" src="@Model.URL" />
+    <div class="buttons-movie">
+        @if(User.IsInRole("Admin") || User.IsInRole("Editor")) { 
+        <p class="button-movie">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
+        </p>}
+        <p class="button-movie">
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+        @if(User.IsInRole("Admin") || User.IsInRole("Editor")) { 
+        <p class="button-movie">
+            @Html.ActionLink("Delete", "Delete", new { id = Model.ID })
+        </p>}
+    </div>
+</div>
+<div class="rightDiv">
+    <ul class="movie-stats">
+        <li>
+            @Html.DisplayNameFor(model => model.Name)
+            <span class="value-box">
+                @Html.DisplayFor(model => model.Name)
+            </span>
+        </li>
+
+        <li>
+            @Html.DisplayNameFor(model => model.Rating)
+            <span class="value-box">
+                @Html.DisplayFor(model => model.Rating)
+            </span>
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.Genre)
+            <span class="value-box">
+                @Html.DisplayFor(model => model.Genre)
+            </span>
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.Description)
+            <p class="value-box">
+                @Html.DisplayFor(model => model.Description)
+            </p>
+        </li>
+        @if (User.IsInRole("Admin") || User.IsInRole("Editor") || User.IsInRole("Submittor"))
+        {
+            <div style="margin-bottom: 120px;">
+            <li class="subtitle-add-button">
+                @Html.ActionLink("Add a subtitle from file", "AddSubtitleFile", new { id = Model.ID })
+            </li>
+            <li class="subtitle-add-button">
+                @Html.ActionLink("Add a subtitle from raw", "AddSubtitle", new { id = Model.ID })
+            </li>
+</div>
+        }
+
+    </ul>
+    <h3 class="titlesh2">SUBTITLES:</h3>
+    @{
+        int count = Model.movieSubtitles.Count;
+        if (count == 0)
+        {
+                <h4 style="text-align: center; margin-top: 75px; font-family: 'Dimbo'; font-size: 260%">The selected movie has no available subtitles at the time.</h4>
+            }
+        else
+        {
+
+                <ul class="available-subs">
+                    @{
+                        IEnumerable<Subtitle_Directorium.Models.Subtitle> list = Model.movieSubtitles;
+                        list = (IEnumerable<Subtitle_Directorium.Models.Subtitle>)list.OrderBy(model => model.language);
+                        foreach (Subtitle_Directorium.Models.Subtitle sub in list)
+                        {
+                            <li >
+                                <span class="lang">
+                                                
+                                @{
+                                    @sub.language
+                                } 
+                                </span>
+                                <span class="space">
+                                    @{
+                                        @Html.ActionLink("View Subtitle", "SubDetails", new { id = sub.ID })
+                                        @Html.ActionLink("Download", "DownloadSubtitle", new { id = sub.ID })
+                                    }
+                                </span>
+                            </li>
+                 }
+            }
+                </ul>
+            }
+        }
+</div>
+
+</div>
+

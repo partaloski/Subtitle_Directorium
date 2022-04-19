@@ -1,0 +1,44 @@
+﻿@model Subtitle_Directorium.Models.Subtitle
+<head>
+    <link href="@Url.Content("~/Styles/styleCreate.css")" rel="stylesheet" type="text/css" />
+</head>
+@{
+    ViewBag.Title = "Create";
+}
+<h2 class="titlesh2">Add a subtitle for the movie "@Session["MovieName"]"</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" id="createDiv">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.language, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.language, new { htmlAttributes = new { @class = "form-control", style = "height: 100px; margin-top: 0px; font-size: 350%; font-family: Dimbo;" } })
+                @Html.ValidationMessageFor(model => model.language, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.raw, htmlAttributes: new { @class = "control-label col-md-2", id = "last2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.raw, htmlAttributes: new { @rows = "20", @cols = "50", required = "required" })
+                <!--Html.EditorFor(model => model.raw, new { htmlAttributes = new { class = "form-control", cols ="100", rows ="10" } })-->
+                @Html.ValidationMessageFor(model => model.raw, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" id="submit" />
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

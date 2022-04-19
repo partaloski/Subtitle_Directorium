@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Subtitle_Directorium.Models.AddToRoleModel>
+<head>
+    <link href="@Url.Content("~/Styles/styleIndex.css")" rel="stylesheet" type="text/css" />
+</head>
+@{
+    ViewBag.Title = "Movies List";
+}
+
+<h2 class="titlesh2">List of Users that requested access</h2>
+<ul style="list-style-type: none;"></ul>
+<div id="createDiv2">
+    @{
+        if (Model.Count() == 0)
+        {
+            <h2 style="font-family: Dimbo; color: white; text-align:center; font-size: 300%; -webkit-text-stroke-color: black; -webkit-text-stroke-width: 0.5px">No users have made requests, you are free to go!</h2>
+        }
+        else
+        {
+            <ul style="list-style-type: none;">
+            @foreach (var item in Model)
+            {
+                <li class="user-approval">
+                    @item.Email has requested access to become an user of the <span style="font-family:Adventure; font-size: 110%;">@item.role</span>  role<br />
+                    @Html.ActionLink("Approve User", "ApproveUser", new { id = @item.Id })
+                    @Html.ActionLink("Decline User", "DeclineUser", new { id = @item.Id })
+                </li>
+            }</ul>
+        }
+    }
+</div>

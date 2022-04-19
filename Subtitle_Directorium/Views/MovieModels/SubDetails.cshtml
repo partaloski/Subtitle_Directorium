@@ -1,0 +1,66 @@
+﻿@model Subtitle_Directorium.Models.Subtitle
+
+<head>
+    <link href="@Url.Content("~/Styles/styleEdit.css")" rel="stylesheet" type="text/css" />
+</head>
+@{
+    ViewBag.Title = "Detailed view for the subtitle";
+}
+
+<h2 class="titlesh2">Detailed view for the subtitle for the movie @Session["MovieName"]</h2>
+
+<div class="tablex">
+    <ul class="top">
+
+        @if (User.IsInRole("Admin") || User.IsInRole("Editor") || User.IsInRole("Submittor")) { 
+        <li>
+            @Html.ActionLink("Edit as a copy", "SubAddC", new { id = Model.ID })
+        </li>}
+        <li>
+            @Html.ActionLink("Back to List", "Index")
+        </li>
+        <li>
+            @Html.ActionLink("Download", "DownloadSubtitle", new { id = Model.ID })
+        </li>
+    </ul>
+</div>
+<div>
+    <div class="item-fix">
+        <span>
+            @Html.DisplayNameFor(model => model.language)<br />
+            <strong>@Html.DisplayFor(model => model.language)</strong>
+        </span>
+        @{
+            List<Subtitle_Directorium.Models.Line> lines = (List<Subtitle_Directorium.Models.Line>)Session["subLines"];
+            int cout = lines.Count / 6;
+            cout++;
+            for (int i = 0; i < cout; i++)
+            {
+                <img src="@Session["URL"]" />
+            }
+        }
+    </div>
+<div class="item-fix">
+    @{ 
+                foreach (Subtitle_Directorium.Models.Line line in lines)
+                {
+        <div class="line-content">
+            <strong>@line.number</strong><br />
+            <strong>@line.timestamp</strong>
+            <div class="sub-lines">
+                @{
+                    string[] linesplit = line.text.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
+                    foreach (string l in linesplit)
+                    {
+                        <p>@l</p>
+                    }
+                }
+            </div>
+            @if (User.IsInRole("Admin") || User.IsInRole("Editor") || User.IsInRole("Submittor"))
+            {
+                @Html.ActionLink("Edit", "LineEdit", new { id = line.ID })}
+        </div>                      
+            }
+    }
+</div>
+</div>

@@ -1,0 +1,28 @@
+﻿@model Subtitle_Directorium.Models.AddToRoleModel
+
+@{
+    ViewBag.Title = "AddUserToRole";
+}
+
+<head>
+    <link href="@Url.Content("~/Styles/styleCreate.css")" rel="stylesheet" type="text/css" />
+</head>
+@{
+    ViewBag.Title = "AddUserToRole";
+}
+
+<h2 class="titlesh2">Submit a request to get a certain role!</h2>
+@using (Html.BeginForm("RequestUserAccess", "Account"))
+{
+    <div id="createDiv2">
+        <div class="form-group" id="dropdown">
+            <h4 class="titlesSpecial">Choose the role you want to request</h4>
+            @Html.DropDownListFor(model => model.role, new SelectList(Model.roles), new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Request Access to role." id="submit2" />
+        </div>
+    </div>
+
+}
+
